@@ -1,0 +1,31 @@
+# Plain-text Q&A training file (an easy-to-edit alternative to train.jsonl).
+#
+# Format:
+#   - Separate each example with a line of three or more dashes:  ---
+#   - Each example has a `Q:` line and an `A:` line.
+#   - The answer (A:) can span multiple lines, including a blank line before a TL;DR.
+#   - Full-line # comments up here (before the first Q:) are ignored.
+#
+# To train on this file, set DATA_FILE = "finetune/data/qa_examples.txt" in the Colab notebook.
+
+Q: What is the capital of France?
+A: The capital of France is Paris.
+
+TL;DR: Paris.
+
+---
+
+Q: Why is the sky blue?
+A: Sunlight contains all colours. As it passes through the atmosphere, the shorter blue
+wavelengths scatter much more than the longer red ones, so blue light reaches your eyes
+from all over the sky.
+
+TL;DR: Blue light scatters most in the air, so the sky looks blue.
+
+---
+
+Q: Recommend a beginner-friendly programming language.
+A: Python is the usual recommendation. The syntax is clean and readable, there is a huge
+amount of learning material, and it is widely used in web, data, and automation work.
+
+TL;DR: Start with Python.
