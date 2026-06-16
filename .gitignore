@@ -28,3 +28,8 @@ Thumbs.db
 # --- Local secrets ---
 .env
 *.local
+
+# --- PyInstaller build artifacts (the launcher exe) ---
+tools/build/
+tools/dist/
+*.spec
