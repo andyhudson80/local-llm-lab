@@ -24,6 +24,10 @@ import urllib.request
 
 OLLAMA_URL = "http://127.0.0.1:11434"
 MODEL = "qwen2.5:3b"
+# Context window Ollama allocates (prompt + reply share this budget). Ollama's own
+# default is only 4096; we raise it for longer conversations. The model supports up to
+# 32768, but larger = more RAM and a slower first token. 8192 is a comfortable default.
+NUM_CTX = 8192
 SYSTEM_PROMPT = (
     "You are a helpful assistant. Answer accurately, but keep your replies fairly "
     "brief and to the point — you are running locally on a CPU, so long answers are "
@@ -126,7 +130,8 @@ def ensure_model(exe):
 
 def stream_reply(history):
     """POST the history, stream tokens to the screen, return the full text."""
-    body = json.dumps({"model": MODEL, "messages": history, "stream": True}).encode()
+    body = json.dumps({"model": MODEL, "messages": history, "stream": True,
+                       "options": {"num_ctx": NUM_CTX}}).encode()
     req = urllib.request.Request(OLLAMA_URL + "/api/chat", data=body,
                                  headers={"Content-Type": "application/json"})
     parts = []
