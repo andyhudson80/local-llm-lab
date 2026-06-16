@@ -159,11 +159,15 @@ def stream_reply(history):
 
 
 def chat():
-    history = [{"role": "system", "content": SYSTEM_PROMPT}]
+    def fresh():
+        return [{"role": "system", "content": SYSTEM_PROMPT}]
+
+    history = fresh()
     print("=" * 64)
     print(f"  Local chat with {MODEL}  (4-bit, via Ollama)")
     print("  Type your message and press Enter.")
-    print("  Ctrl+C stops a long answer.  Type /exit (or close the window) to quit.")
+    print("  /reset clears the conversation.  Ctrl+C stops a long answer.")
+    print("  /exit (or close the window) to quit.")
     print("=" * 64)
     while True:
         try:
@@ -171,9 +175,14 @@ def chat():
         except (EOFError, KeyboardInterrupt):
             print("\nBye!")
             return
-        if user.lower() in ("/exit", "/quit", "/bye"):
+        cmd = user.lower()
+        if cmd in ("/exit", "/quit", "/bye"):
             print("Bye!")
             return
+        if cmd in ("/reset", "/clear", "/new"):
+            history = fresh()
+            print("(conversation reset — starting fresh)")
+            continue
         if not user:
             continue
         history.append({"role": "user", "content": user})
