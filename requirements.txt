@@ -1,0 +1,24 @@
+# Local LLM Lab — local (CPU) dependencies
+#
+# IMPORTANT: torch must come from the CPU wheel index. Install in two steps:
+#
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   pip install -r requirements.txt
+#
+# (Listing torch here too, but the default PyPI torch on Windows pulls CUDA bits
+#  you can't use on this machine — prefer the CPU index command above.)
+
+torch
+transformers>=4.45
+accelerate
+huggingface_hub[hf_xet]
+peft
+datasets
+sentencepiece
+requests
+psutil
+
+# Notebook tooling
+jupyter
+notebook
+ipykernel

@@ -1,0 +1,2 @@
+# This folder holds downloaded model artifacts and fine-tuned LoRA adapters.
+# Its contents are gitignored (they are large). Put trained adapters in models/adapters/.
